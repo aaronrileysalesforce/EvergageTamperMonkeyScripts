@@ -1,0 +1,149 @@
+/* ----------- DO NOT EDIT BELOW ----------- */
+// ==UserScript==
+// @name         Evergage NTO Demo Text Replacement
+// @version      1.0
+// @author       Aaron Riley
+// @description  Modified William Garrison's MC Replacement Script with Bob's Evergage Logo script and added some image replacement
+// @match        https://mc.exacttarget.com/*
+// @match        https://mc.s4.exacttarget.com/*
+// @match        https://mc.s6.exacttarget.com/*
+// @match        https://mc.s7.exacttarget.com/*
+// @match        https://mc.s8.exacttarget.com/*
+// @match        https://mc.s10.exacttarget.com/*
+// @match        https://pi.pardot.com/*
+// @match        https://*.marketingcloudapps.com/*
+// @match        https://console.krux.com/*
+// @match        https://krux.salesforcedemo.com/*
+// @match        https://*.evergage.com/*
+// @match        https://*.devergage.com/*
+// @exclude      https://mc.s4.exacttarget.com/AudienceBuilder/*
+// @exclude      https://*.thunderhead.com/one/*
+// @require https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js
+// @require https://gist.github.com/raw/2625891/waitForKeyElements.js
+// ==/UserScript==
+
+var replaceArry = [
+/*
+  _____ ____ ___ _____   _   _ _____ ____ _____
+ | ____|  _ \_ _|_   _| | | | | ____|  _ \| ____|
+ |  _| | | | | |  | |   | |_| |  _| | |_) |  _|
+ | |___| |_| | |  | |   |  _  | |___|  _ <| |___
+ |_____|____/___| |_|   |_| |_|_____|_| \_\_____|
+
+Add strings into the replacement array in the form of
+[/Words to find/gi,'Words to replace'],
+*/
+
+    [/NTO/gi,'Under Armour'],
+    [/tvickers@salesforce.com/gi,'rmorris@sfdemo.com'],
+    [/Rovereto/gi,'HOVR Machina'],
+    [/(?:^|\W)Att(?:$|\W)/gi,'Blue Ink / Peach Frost - 402'],
+    [/(?:^|\W)Bj8(?:$|\W)/gi,'Rift Blue / Orange Spark - 401'],
+    [/(?:^|\W)Bkm(?:$|\W)/gi,'White / Black - 103'],
+    [/(?:^|\W)Bkn(?:$|\W)/gi,'Hushed Pink / Beta - 603'],
+
+    [/(?:^|\W)Ac8(?:$|\W)/gi,'French Gray / Beta - 604'],
+
+    [/(?:^|\W)Bed(?:$|\W)/gi,'White / White - 100'],
+    [/(?:^|\W)Bhm(?:$|\W)/gi,'Black / White - 001'],
+    [/(?:^|\W)Aa3(?:$|\W)/gi,'Mod Gray / Mod Gray - 105'],
+
+
+    [/Community Membership/gi,'In "Through This Together" Challenge'],
+    [/External User ID/gi, 'Miles Tracked'],
+    [/12345/gi, '21'],
+    [/NTO Test Group/gi, 'UA Test Group'],
+
+/*
+  _____ _   _ ____     ___  _____   _____ ____ ___ _____ ____
+ | ____| \ | |  _ \   / _ \|  ___| | ____|  _ \_ _|_   _/ ___|
+ |  _| |  \| | | | | | | | | |_    |  _| | | | | |  | | \___ \
+ | |___| |\  | |_| | | |_| |  _|   | |___| |_| | |  | |  ___) |
+ |_____|_| \_|____/   \___/|_|     |_____|____/___| |_| |____/
+*/
+];
+
+var numTerms    = replaceArry.length;
+var transTimer  = setInterval (translateTermsOnPage, 222);
+
+function translateTermsOnPage () {
+    var txtWalker   = document.createTreeWalker (
+        document.body,
+        NodeFilter.SHOW_TEXT, {
+            acceptNode: function (node) {
+                if (node.nodeValue.trim() ) {
+                    if (node.tmWasProcessed)
+                        return NodeFilter.FILTER_SKIP;
+                    else
+                        return NodeFilter.FILTER_ACCEPT;
+                }
+                return NodeFilter.FILTER_SKIP;
+            }
+        },
+        false
+    );
+    var txtNode     = null;
+    while (txtNode  = txtWalker.nextNode()) {
+        txtNode.nodeValue       = replaceAllTerms (txtNode.nodeValue);
+        txtNode.tmWasProcessed  = true;
+    }
+    var placeholderNodes    = document.querySelectorAll ("[placeholder]");
+    replaceManyAttributeTexts (placeholderNodes, "placeholder");
+
+    var titleNodes          = document.querySelectorAll ("[title]");
+    replaceManyAttributeTexts (titleNodes, "title");
+}
+
+function replaceAllTerms (oldTxt) {
+    for (var J  = 0;  J < numTerms;  J++) {
+        oldTxt  = oldTxt.replace (replaceArry[J][0], replaceArry[J][1]);
+    }
+    return oldTxt;
+}
+
+function replaceManyAttributeTexts (nodeList, attributeName) {
+    for (var J = nodeList.length - 1;  J >= 0;  --J) {
+        var node    = nodeList[J];
+        var oldText = node.getAttribute (attributeName);
+        if (oldText) {
+            oldText = replaceAllTerms (oldText);
+            node.setAttribute (attributeName, oldText);
+        }
+    }
+}
+
+
+var $ = window.jQuery;
+$(document).ready(function () {
+
+    let checkFunction = function(){
+       if($('.navbar-header').length > 0){
+           $('.navbar-header').remove();
+           clearInterval(this);
+       }
+   }
+   var checkForLogoInterval = setInterval(checkFunction, 200);
+
+    function replaceImages () {
+     var images = document.getElementsByTagName ("img");
+       var x=0;
+       var y=0;
+       while(x<images.length) {
+           for (y = 0; y < replaceImgArray.length; y++) {
+               if(images[x].src == replaceImgArray[y][0]) {
+                   images[x].src = replaceImgArray[y][1];
+               }
+           }
+           x=x+1;
+       }
+}
+
+var replaceImgArray = [
+    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dwc4239d86/images/hi-res/2050857ATT-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/3021956-402_TOE?template=v65GridLarge&$size=253,311&$wid=281&$hei=345"],
+    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw9912dc28/images/hi-res/2050934AAV-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/3022596-100_A?template=v65GridLarge&$wid=281&$hei=345"],
+    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-gear/default/dwc6145665/images/hi-res/5112990AAE-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1350066-462_HF?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
+    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw80fc5869/images/hi-res/2040614AA3-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1344552-002_HB?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
+];
+   var imgTimer = setInterval(replaceImages, 200);
+})();
+
