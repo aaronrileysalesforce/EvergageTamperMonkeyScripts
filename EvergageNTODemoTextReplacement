@@ -36,7 +36,20 @@ Add strings into the replacement array in the form of
 
     [/NTO/gi,'Under Armour'],
     [/tvickers@salesforce.com/gi,'rmorris@sfdemo.com'],
+    [/tvickers/gi,'rmorris'],
     [/Rovereto/gi,'HOVR Machina'],
+    [/Community Membership/gi,'In "Through This Together" Challenge'],
+    [/External User ID/gi, 'Miles Tracked'],
+    [/12345/gi, '21'],
+    [/NTO Test Group/gi, 'UA Test Group'],
+    [/Indianapolis, IN/gi, 'San Francisco, CA'],
+    [/Herndon, VA/gi, 'San Francisco, CA'],
+    [/Frankfurt Am Main, HE DE/gi, 'San Francisco, CA US'],
+
+    [/Tyler/gi, 'Rachel'],
+    [/Vickers/gi, 'Morris'],
+
+
     [/(?:^|\W)Att(?:$|\W)/gi,'Blue Ink / Peach Frost - 402'],
     [/(?:^|\W)Bj8(?:$|\W)/gi,'Rift Blue / Orange Spark - 401'],
     [/(?:^|\W)Bkm(?:$|\W)/gi,'White / Black - 103'],
@@ -48,14 +61,6 @@ Add strings into the replacement array in the form of
     [/(?:^|\W)Bhm(?:$|\W)/gi,'Black / White - 001'],
     [/(?:^|\W)Aa3(?:$|\W)/gi,'Mod Gray / Mod Gray - 105'],
 
-
-    [/Community Membership/gi,'In "Through This Together" Challenge'],
-    [/External User ID/gi, 'Miles Tracked'],
-    [/12345/gi, '21'],
-    [/NTO Test Group/gi, 'UA Test Group'],
-
-    [/Indianapolis, IN/gi, 'San Francisco, CA'],
-
 /*
   _____ _   _ ____     ___  _____   _____ ____ ___ _____ ____
  | ____| \ | |  _ \   / _ \|  ___| | ____|  _ \_ _|_   _/ ___|
@@ -64,6 +69,30 @@ Add strings into the replacement array in the form of
  |_____|_| \_|____/   \___/|_|     |_____|____/___| |_| |____/
 */
 ];
+
+var replaceImgArray = [
+    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dwc4239d86/images/hi-res/2050857ATT-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/3021956-402_TOE?template=v65GridLarge&$size=253,311&$wid=281&$hei=345"],
+    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw9912dc28/images/hi-res/2050934AAV-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/3022596-100_A?template=v65GridLarge&$wid=281&$hei=345"],
+    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-gear/default/dwc6145665/images/hi-res/5112990AAE-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1350066-462_HF?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
+    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw80fc5869/images/hi-res/2040614AA3-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1344552-002_HB?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
+];
+
+var data = [
+    /*
+		Add, remove and modify lines here.
+		Quadrants: topLeft, bottomLeft, topRight, bottomRight.
+		Line: line number in the quadrant that you would like to update
+		Label: new value of the line
+		Bar: new size of the bar. Value from to 100
+    */
+    {quadrant: "bottomRight", line: 1, label: "White / Black - 103", bar: 80}
+    ,{quadrant: "bottomRight", line: 2, label: "Rift Blue / Orange Spark - 401", bar: 35}
+    ,{quadrant: "bottomRight", line: 3, label: "Blue Ink / Peach Frost - 402", bar: 80}
+    ,{quadrant: "bottomRight", line: 4, label: "Hushed Pink / Beta - 603", bar: 35}
+];
+
+
+
 
 var numTerms    = replaceArry.length;
 var transTimer  = setInterval (translateTermsOnPage, 222);
@@ -114,17 +143,15 @@ function replaceManyAttributeTexts (nodeList, attributeName) {
     }
 }
 
-
 var $ = window.jQuery;
 $(document).ready(function () {
-
     let checkFunction = function(){
        if($('.navbar-header').length > 0){
            $('.navbar-header').remove();
            clearInterval(this);
        }
-   }
-   var checkForLogoInterval = setInterval(checkFunction, 200);
+    }
+    var checkForLogoInterval = setInterval(checkFunction, 200);
 
     function replaceImages () {
      var images = document.getElementsByTagName ("img");
@@ -147,18 +174,49 @@ $(document).ready(function () {
              document.getElementById("egUserLocationMap").appendChild(map);
         }
 
-}
+    }
 
-var replaceImgArray = [
-    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dwc4239d86/images/hi-res/2050857ATT-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/3021956-402_TOE?template=v65GridLarge&$size=253,311&$wid=281&$hei=345"],
-    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw9912dc28/images/hi-res/2050934AAV-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/3022596-100_A?template=v65GridLarge&$wid=281&$hei=345"],
-    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-gear/default/dwc6145665/images/hi-res/5112990AAE-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1350066-462_HF?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
-    ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw80fc5869/images/hi-res/2040614AA3-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1344552-002_HB?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
-];
-   var imgTimer = setInterval(replaceImages, 200);
+    var imgTimer = setInterval(replaceImages, 200);
 
+    function donutUpdate(){
+        data.forEach(e => {
+            var labelElement = document.querySelector(`div#${e.quadrant} .highcharts-xaxis-labels text:nth-child(${e.line}) tspan`);
+            var barElement = document.querySelector(`div#${e.quadrant} .highcharts-container .highcharts-series rect:nth-child(${e.line})`);
 
+            if(labelElement){
+                labelElement.innerHTML = e.label;
+            }
 
+            if(barElement && e.bar){
+                var maxHeight = parseFloat(barElement.getAttribute('y')) + parseFloat(barElement.getAttribute('height'));
+                var newHeight = maxHeight * (1.0 * e.bar / 100);
+                var newY = maxHeight - newHeight;
+
+                barElement.setAttribute('width', 8);
+                barElement.setAttribute('height', newHeight);
+                barElement.setAttribute('y', newY);
+            }
+
+        });
+    }
+
+    function onclickDonutUpdate(){
+        document.querySelectorAll('div.donut-center-icons i').forEach(e => {
+            e.addEventListener('click', () => {
+                setTimeout(_ => {
+                    donutUpdate();
+                }, 100);
+            });
+        });
+    }
+
+    var interval = setInterval(_ => {
+        if(document.querySelectorAll('div.donut-center-icons i').length){
+            //clearInterval(interval);
+            //donutUpdate();
+            //onclickDonutUpdate();
+        }
+    }, 100);
 
 })();
 
