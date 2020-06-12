@@ -54,6 +54,8 @@ Add strings into the replacement array in the form of
     [/12345/gi, '21'],
     [/NTO Test Group/gi, 'UA Test Group'],
 
+    [/Indianapolis, IN/gi, 'San Francisco, CA'],
+
 /*
   _____ _   _ ____     ___  _____   _____ ____ ___ _____ ____
  | ____| \ | |  _ \   / _ \|  ___| | ____|  _ \_ _|_   _/ ___|
@@ -136,6 +138,15 @@ $(document).ready(function () {
            }
            x=x+1;
        }
+        if (document.getElementById("egUserLocationMap")) {
+             var map = document.createElement("img");
+             //map.src = "https://images.vexels.com/media/users/3/147702/isolated/preview/2095f15fc1d24a7e474b47109ce3fd97-california-state-plain-map-by-vexels.png";
+             map.src = "https://amnet.net/wp-content/uploads/2017/01/ThinkstockPhotos-486387362.jpg";
+             map.style = "height:75%;width:75%;padding-left:10px;padding-top:10px;";
+             document.getElementById("egUserLocationMap").innerHTML = "";
+             document.getElementById("egUserLocationMap").appendChild(map);
+        }
+
 }
 
 var replaceImgArray = [
@@ -145,5 +156,9 @@ var replaceImgArray = [
     ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw80fc5869/images/hi-res/2040614AA3-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1344552-002_HB?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
 ];
    var imgTimer = setInterval(replaceImages, 200);
+
+
+
+
 })();
 
