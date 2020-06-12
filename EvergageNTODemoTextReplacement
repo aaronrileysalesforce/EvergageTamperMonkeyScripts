@@ -24,12 +24,6 @@
 
 var replaceArry = [
 /*
-  _____ ____ ___ _____   _   _ _____ ____ _____
- | ____|  _ \_ _|_   _| | | | | ____|  _ \| ____|
- |  _| | | | | |  | |   | |_| |  _| | |_) |  _|
- | |___| |_| | |  | |   |  _  | |___|  _ <| |___
- |_____|____/___| |_|   |_| |_|_____|_| \_\_____|
-
 Add strings into the replacement array in the form of
 [/Words to find/gi,'Words to replace'],
 */
@@ -60,17 +54,13 @@ Add strings into the replacement array in the form of
     [/(?:^|\W)Bed(?:$|\W)/gi,'White / White - 100'],
     [/(?:^|\W)Bhm(?:$|\W)/gi,'Black / White - 001'],
     [/(?:^|\W)Aa3(?:$|\W)/gi,'Mod Gray / Mod Gray - 105'],
-
-/*
-  _____ _   _ ____     ___  _____   _____ ____ ___ _____ ____
- | ____| \ | |  _ \   / _ \|  ___| | ____|  _ \_ _|_   _/ ___|
- |  _| |  \| | | | | | | | | |_    |  _| | | | | |  | | \___ \
- | |___| |\  | |_| | | |_| |  _|   | |___| |_| | |  | |  ___) |
- |_____|_| \_|____/   \___/|_|     |_____|____/___| |_| |____/
-*/
 ];
 
 var replaceImgArray = [
+    /*
+Add URLs into the replacement array in the form of
+[/Image Src to find/gi,'Img Src to replace'],
+*/
     ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dwc4239d86/images/hi-res/2050857ATT-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/3021956-402_TOE?template=v65GridLarge&$size=253,311&$wid=281&$hei=345"],
     ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw9912dc28/images/hi-res/2050934AAV-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/3022596-100_A?template=v65GridLarge&$wid=281&$hei=345"],
     ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-gear/default/dwc6145665/images/hi-res/5112990AAE-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1350066-462_HF?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
@@ -79,16 +69,19 @@ var replaceImgArray = [
 
 var data = [
     /*
-		Add, remove and modify lines here.
+		Add, remove and modify lines here for Affinity donut changes. Uncomment the rows below if you want to use this.
 		Quadrants: topLeft, bottomLeft, topRight, bottomRight.
 		Line: line number in the quadrant that you would like to update
 		Label: new value of the line
 		Bar: new size of the bar. Value from to 100
-    */
+    EXAMPLE:
+
     {quadrant: "bottomRight", line: 1, label: "White / Black - 103", bar: 80}
     ,{quadrant: "bottomRight", line: 2, label: "Rift Blue / Orange Spark - 401", bar: 35}
     ,{quadrant: "bottomRight", line: 3, label: "Blue Ink / Peach Frost - 402", bar: 80}
     ,{quadrant: "bottomRight", line: 4, label: "Hushed Pink / Beta - 603", bar: 35}
+
+    */
 ];
 
 
@@ -212,9 +205,9 @@ $(document).ready(function () {
 
     var interval = setInterval(_ => {
         if(document.querySelectorAll('div.donut-center-icons i').length){
-            //clearInterval(interval);
-            //donutUpdate();
-            //onclickDonutUpdate();
+            clearInterval(interval);
+            donutUpdate();
+            onclickDonutUpdate();
         }
     }, 100);
 
