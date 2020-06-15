@@ -1,6 +1,6 @@
 /* ----------- DO NOT EDIT BELOW ----------- */
 // ==UserScript==
-// @name         Evergage NTO Demo Text Replacement
+// @name         Evergage NTO Demo UCP Update Script
 // @version      1.0
 // @author       Aaron Riley
 // @description  Modified William Garrison's MC Replacement Script with Bob's Evergage Logo script and added some image replacement
@@ -65,6 +65,7 @@ Add URLs into the replacement array in the form of
     ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw9912dc28/images/hi-res/2050934AAV-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/3022596-100_A?template=v65GridLarge&$wid=281&$hei=345"],
     ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-gear/default/dwc6145665/images/hi-res/5112990AAE-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1350066-462_HF?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
     ["https://www.northerntrailoutfitters.com/dw/image/v2/BDPX_PRD/on/demandware.static/-/Sites-nto-apparel/default/dw80fc5869/images/hi-res/2040614AA3-0.jpg?sw=800&sh=800", "https://underarmour.scene7.com/is/image/Underarmour/PS1344552-002_HB?scl=1&fmt=jpg&qlt=80&wid=612&hei=650&size=551,585&cache=on,off&bgc=f0f0f0&resMode=sharp2"],
+    ["https://interactionstudio.evergage.com/ui/images/logo_on_dark.svg","https://mc.login.exacttarget.com/hub-cas/img/MarketingCloud_Logo.svg"]
 ];
 
 var data = [
@@ -140,7 +141,12 @@ var $ = window.jQuery;
 $(document).ready(function () {
     let checkFunction = function(){
        if($('.navbar-header').length > 0){
-           $('.navbar-header').remove();
+           //hide logo Option if embedded in MC
+           //$('.navbar-header').remove();
+
+           //Change menu background color if you like
+           document.getElementById("side-bar-nav").style = "background-color:#1071a8;";
+
            clearInterval(this);
        }
     }
